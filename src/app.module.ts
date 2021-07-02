@@ -5,9 +5,12 @@ import { MongooseModule } from '@nestjs/mongoose'
 import { AppService } from './app.service';
 import { ProductsModule } from './products/products.module';
 
+import { ConfigModule } from '@nestjs/config';
+
+
 @Module({
-  imports: [ProductsModule, MongooseModule.forRoot('mongodb+srv://kumail:mysystem01@cluster0.8kpy2.mongodb.net/nestjs-demo?retryWrites=true&w=majority')],
+  imports: [ProductsModule, MongooseModule.forRoot(process.env.MONGODBLINK), ConfigModule.forRoot()],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
